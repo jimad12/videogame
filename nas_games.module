@@ -1,0 +1,72 @@
+<?php
+
+/**
+* Implementation of hook_menu().
+*/
+function nas_games_menu() {
+
+  $items['games/mission-migration'] = array(
+    'title' => t('Mission Migration Game'),
+    'description' => 'Interactive Game on Birds Migration',
+    'page callback' => 'nas_games_mission_migration',
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => '13',
+   );
+   return $items;
+}
+
+/*
+function nas_kiosk_menu() {
+    $items['kiosk/entry'] = array(
+    'title' => t('Kiosk Data Result'),
+    'description' => 'This module is getting its data from an external script& email the submitter back her data',
+    'page callback' => 'nas_kiosk_data',
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => '11',
+   );
+    return $items;
+  }
+*/
+
+/**
+ *
+ *Implementation of the games_mission-migration_hook() by James L
+ */
+
+function nas_games_mission_migration() {
+
+// you may need to use drupal_get_path to write the full url to the swf file once you move the file into nas dir
+
+// preloader does not work, it won't find the right path for the actual game, so skipping preloader
+//$preloader = base_path().drupal_get_path('module', 'nas').'/Audubon_game_preloader.swf';
+$game = base_path().drupal_get_path('module', 'nas_games').'/games/mission-migration/Audubon_Migration_Game_Final.swf';
+
+  $output = '<!--url\'s used in the movie-->
+<!--text used in the movie-->
+<!--
+0
+-->
+<!-- saved from url=(0013)about:internet -->
+  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="420" height="500" id="Audubon_game_preloader" align="middle">
+<param name="allowScriptAccess" value="sameDomain" />
+<param name="movie" value="'.$game.'" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><embed src="'.$game.'" quality="high" bgcolor="#ffffff" width="420" height="500" name="Audubon_game_preloader" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+</object>
+
+<br/>In the spring and the fall, many birds fly long distances in search of food, water, shelter and space: the same basic things that you need to survive. Along these routes, they encounter many different types of habitats, from country and forest to neighborhoods and big cities, and at times, encounter dangers from both natural and manmade hazards. <br/> <br/>
+In this game you will try to help your flock migrate safely by learning how choices you make each and every day around your home, school, and neighborhood can affect the fate of these migrating birds - in both positive and negative ways. By the time you\'re done, you\'ll have the skills and knowledge to help birds thrive and survive around your home.<br/> <br>
+
+<table cellpadding="5" cellspacing="0" border="0">
+<tr>
+<td valign="top"><img src="'. base_path().drupal_get_path('module', 'nas').'/games/mission-migration/Compass.gif" border="0"></td>
+<td class="normaltext"><i><b>DID YOU KNOW...??</b><br>
+Many birds follow the same routes year after year by using landmarks, the sun, moon, and stars.  Some species even have their own internal compass in their brains to help direct them instinctively.</i>
+</td>
+</tr>
+</table>';
+
+  return $output;
+
+
+}
